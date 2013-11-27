@@ -173,7 +173,7 @@ app.post('/logout', function (req, res) {
 app.use('/', express.static(__dirname + '/public/'));
 
 //socket:
-io = io.listen(app.listen(process.env.PORT || 80));
+io = io.listen(app.listen(process.env.PORT || 4730));
 
 io.sockets.on('connection', function (socket) {
     socket.emit('message', { action: 'connected' });
