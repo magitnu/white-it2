@@ -62,10 +62,10 @@ function returnIndex(res, id, array) {
     return res.json(array[id]);
 }
 
-app.get('/', function(req, res) {
-  res.type('text/plain'); 
-  res.json(entries);
-});
+//app.get('/', function(req, res) {
+//  res.type('text/plain'); 
+//  res.json(entries);
+//});
  
 app.get('/login', function (req, res) {
     if (typeof (req.session.user_id) == "number") {
