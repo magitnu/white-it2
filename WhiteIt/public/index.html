@@ -26,12 +26,12 @@
 			<div class="navbar-collapse collapse">
 				<form class="navbar-form navbar-right" role="form">
 					<div class="form-group">
-						<input type="text" placeholder="Email" class="form-control">
+						<input type="text" data-bind="value: user" placeholder="User" class="form-control">
 					</div>
 					<div class="form-group">
-						<input type="password" placeholder="Password" class="form-control">
+						<input type="password" data-bind="value: password" placeholder="Password" class="form-control">
 					</div>
-					<button type="submit" class="btn btn-success">Sign in</button>
+					<button data-bind="click: $root.login()" class="btn btn-success">Sign in</button>
 				</form>
 			</div>
 			<!--/.navbar-collapse -->
@@ -51,20 +51,25 @@
 		<div class="container">
 			<div data-bind="foreach: entries">
 				<div>
-					<img src="images/upVoteBlank.png" />
-					<span data-bind="text: $data.rating.value"></span>
-					<img src="images/downVoteBlank.png" />
+					<img src="images/upVoteBlank.png" data-bind="click: function(data, event) { $root.vote($data.id, 'up') }" /> <span
+						data-bind="text: $data.rating.value"></span> <img
+						src="images/downVoteBlank.png" data-bind="click: function(data, event) { $root.vote($data.id, 'down') }" />
 				</div>
 
-				<h1><span data-bind="text: $data.title"></h1>
-				<p>Created on: <span data-bind="text: $data.createTimeDisplay"></p>
-				<p><span data-bind="text: $data.comments.length"></span> Comments</p>
+				<h1>
+					<a data-bind="attr: { href: $data.url }" target="_blank"><span
+						data-bind="text: $data.title"></span></a>
+				</h1>
+				<p>
+					Created on: <span data-bind="text: $data.createTimeDisplay">
+				</p>
+				<p>
+					<span data-bind="text: $data.comments.length"></span> Comments
+				</p>
 
 				<div class="newComment">
 					<!-- TODO -->
 				</div>
-
-				<li data-bind="text: $data.title"></li>
 			</div>
 		</div>
 	</div>
