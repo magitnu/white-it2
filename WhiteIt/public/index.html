@@ -18,7 +18,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">whiteit2</a>
         </div>
         <div class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" role="form">
@@ -82,9 +82,9 @@
 	      		15
 	      		<img src="images/downVoteBlank.png" />
 	      	</div>
-	      	<h2>Comment Title</h2>
-	      	<p>Comment</p>
-	      	<p>Erstellt am:</p>
+			 <p><label>Erstellt von:</label>: <span data-bind="text: author"></span></p>
+	      	 <p><label>Erstellt am:</label>: <span data-bind="text: createTimeDisplay"></span></p>
+	      	 <p><span data-bind="text: text"></span></p>
         </div>
       </div>
     </div>
@@ -127,6 +127,7 @@
     <script src="Libs/jquery-2.0.3.js" />
     <script src="Libs/bootstrap/js/bootstrap.min.js" />
     <script src="Libs/knockout-3.0.0.js" />
+    <script src="Libs/sammy.js" />
     
     <script src="/socket.io/socket.io.js" />
     <script src="core.js" />
