@@ -51,10 +51,10 @@
 
 	<!-- All Links view -->
 	<div class="jumbotron"
-		data-bind="css: {hidden: currentPage() != 'AllLinks'}">
+		data-bind="visible: currentPage() == 'AllLinks'">
 		<div class="container">
 			<div data-bind="foreach: entries">
-				<div>
+				<div id="test">
 					<img src="images/upVoteBlank.png"
 						data-bind="click: function(data, event) { $root.vote($data.id, 'up') }" />
 					<span data-bind="text: $data.rating.value"></span> <img
@@ -83,7 +83,7 @@
 
 	<!-- Link Detail -->
 	<div class="jumbotron"
-		data-bind="css: {hidden: $root.currentPage() != 'LinkDetail'}">
+		data-bind="visible: currentPage() == 'LinkDetail'">
 		<div class="container">
 
 			<div data-bind="with: currentEntry">

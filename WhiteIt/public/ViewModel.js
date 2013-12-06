@@ -19,12 +19,14 @@ function WhiteItViewModel() {
 	self.showBox = function(box) {
 		// TODO
 	};
+	
+	self.loadEntries = function() {
+		$.get("/entries", self.entries);
+	}
 
 	self.vote = function(entryId, vote) {
-		$.post("/entry/" + entryId + "/" + vote, {
-			id : entryId
-		});
-		$.get("/entries", self.entries);
+		 $.post("/entry/" + entryId + "/" + vote);
+		 self.loadEntries();
 	};
 
 	self.viewLinkDetail = function(entryId) {
@@ -52,7 +54,7 @@ function WhiteItViewModel() {
 		// default path
 		this.get('', function() {
 			this.app.runRoute('get', '#AllLinks');
-			$.get("/entries", self.entries);
+			self.loadEntries();
 		});
 	}).run();
 }
