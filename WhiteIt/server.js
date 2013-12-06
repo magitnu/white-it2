@@ -35,8 +35,11 @@ var comments = [];
 //sample data
 entries.push(new Link(entries.length, "Title", "Author", "http://www.google.ch"));
 var comment = new Comment(0, "TestComment", "Author");
+var comment2 = new Comment(0, "TestComment2", "Author");
 comments.push(comment);
+comments.push(comment2);
 entries[0].comments.push(comment);
+entries[0].comments.push(comment2);
 
 //default user
 users.push(new User(users.length, "a", "a") );

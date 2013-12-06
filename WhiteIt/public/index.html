@@ -46,18 +46,19 @@
 
 	<!-- Message bar -->
 
-	<!-- All Links -->
+	<!-- All Links view -->
 	<div class="jumbotron">
 		<div class="container">
 			<div data-bind="foreach: entries">
 				<div>
-					<img src="images/upVoteBlank.png" /> <span data-bind="text: $data.rating.value"></span>  <img
-						src="images/downVoteBlank.png" />
+					<img src="images/upVoteBlank.png" />
+					<span data-bind="text: $data.rating.value"></span>
+					<img src="images/downVoteBlank.png" />
 				</div>
 
-				<h1><span data-bind="text: $data.url"></h1>
-				<p>Erstellt am:</p>
-				<p>2 Comments</p>
+				<h1><span data-bind="text: $data.title"></h1>
+				<p>Created on: <span data-bind="text: $data.createTimeDisplay"></p>
+				<p><span data-bind="text: $data.comments.length"></span> Comments</p>
 
 				<div class="newComment">
 					<!-- TODO -->
@@ -69,7 +70,7 @@
 	</div>
 
 
-	<!-- Link Detail
+	<!-- Link Detail view
 	<div class="jumbotron">
 		<div class="container">
 			<div>

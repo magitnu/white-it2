@@ -4,7 +4,6 @@ function WhiteItViewModel() {
 	self.boxes = ['Empty', 'Register', 'NewLink'];
 	
 	self.entries = ko.observable();
-	$.get("/entries", {} , self.entries)
 	
 	self.currentPage = ko.observable();
 	self.currentEntry = ko.observable();
@@ -22,6 +21,7 @@ function WhiteItViewModel() {
 		this.get('#:page', function() {
 			self.currentPage(this.params.page);
 			self.currentEntry(null);
+			$.get("/entries", {} , self.entries)
 		});
 		
 		this.get('#:page/:entry', function() {
@@ -33,6 +33,6 @@ function WhiteItViewModel() {
         this.get('', function() { 
         	this.app.runRoute('get', '#AllLinks');
     	});
-	});
+	}).run();
 }
 ko.applyBindings(new WhiteItViewModel());
