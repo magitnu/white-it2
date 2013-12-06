@@ -26,7 +26,7 @@ function WhiteItViewModel() {
 		
 		this.get('#:page/:entry', function() {
 			self.currentPage(this.params.page);
-			self.currentPage(this.params.entry);
+			self.currentEntry(this.params.entry);
 		});
 		
 		//default path
