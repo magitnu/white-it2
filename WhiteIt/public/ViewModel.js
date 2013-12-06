@@ -46,13 +46,13 @@ function WhiteItViewModel() {
 
 		this.get('#:page/:entry', function() {
 			self.currentPage(this.params.page);
-			self.currentEntry(this.params.entry);
+            $.get("/entry/" + this.params.entry, { id: this.params.entry }, self.currentEntry);
 		});
 
 		// default path
 		this.get('', function() {
 			this.app.runRoute('get', '#AllLinks');
-			$.get("/entries", self.entries)
+			$.get("/entries", self.entries);
 		});
 	}).run();
 }

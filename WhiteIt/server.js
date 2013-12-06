@@ -34,12 +34,20 @@ var comments = [];
 
 //sample data
 entries.push(new Link(entries.length, "Title", "Author", "http://www.google.ch"));
-var comment = new Comment(0, "TestComment", "Author");
-var comment2 = new Comment(0, "TestComment2", "Author");
+var comment = new Comment(0, "Super Kommentar", "Der Dort");
+var comment2 = new Comment(0, "Lorem Ipsum Dolor Sit Amet", "Van Hinden");
 comments.push(comment);
 comments.push(comment2);
 entries[0].comments.push(comment);
 entries[0].comments.push(comment2);
+
+entries.push(new Link(entries.length, "DaDadu", "Hans Peter", "http://www.9gag.com"));
+var comment3 = new Comment(1, "Etwas Abwechslung ist auch immer gut...", "Mal Jemand");
+var comment4 = new Comment(1, "TestComment2", "Tom Koch");
+comments.push(comment3);
+comments.push(comment4);
+entries[1].comments.push(comment);
+entries[1].comments.push(comment2);
 
 //default user
 users.push(new User(users.length, "a", "a") );
