@@ -46,7 +46,30 @@
 
 	<!-- Message bar -->
 
-	<!-- Link Detail -->
+	<!-- All Links -->
+	<div class="jumbotron">
+		<div class="container">
+			<div data-bind="foreach: entries">
+				<div>
+					<img src="images/upVoteBlank.png" /> <span data-bind="text: $data.rating.value"></span>  <img
+						src="images/downVoteBlank.png" />
+				</div>
+
+				<h1><span data-bind="text: $data.url"></h1>
+				<p>Erstellt am:</p>
+				<p>2 Comments</p>
+
+				<div class="newComment">
+					<!-- TODO -->
+				</div>
+
+				<li data-bind="text: $data.title"></li>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Link Detail
 	<div class="jumbotron">
 		<div class="container">
 			<div>
@@ -58,7 +81,6 @@
 			<p>Erstellt am:</p>
 			<p>2 Comments</p>
 
-			<!-- repeat for comments -->
 			<div class="comments">
 				<div>
 					<img src="images/upVoteBlank.png" /> 15 <img
@@ -68,63 +90,15 @@
 					<label>Erstellt von:</label>: <span></span>
 				</p>
 				<p>
-					<label>Erstellt am:</label>: <span
-						></span>
+					<label>Erstellt am:</label>: <span></span>
 				</p>
 				<p>
-					<span ></span>
+					<span></span>
 				</p>
 			</div>
 		</div>
 	</div>
-
-	<!-- All Links -->
-	<div class="jumbotron">
-		<div class="container">
-			<ul data-bind="foreach: entries">
-				<li data-bind="text: $data"></li>
-			</ul>
-			<div>
-				<img src="images/upVoteBlank.png" /> 15 <img
-					src="images/downVoteBlank.png" />
-			</div>
-
-			<h1>URL</h1>
-			<p>Erstellt am:</p>
-			<p>2 Comments</p>
-
-			<div class="newComment">
-				<!-- TODO -->
-			</div>
-		</div>
-	</div>
-
-	<!-- Link Detail -->
-	<div class="jumbotron">
-		<div class="container">
-			<div>
-				<img src="images/upVoteBlank.png" /> 15 <img
-					src="images/downVoteBlank.png" />
-			</div>
-		</div>
-
-		<h1>URL</h1>
-		<p>Erstellt am:</p>
-		<p>2 Comments</p>
-
-		<!-- repeat for comments -->
-		<div class="comments">
-			<div>
-				<img src="images/upVoteBlank.png" /> 15 <img
-					src="images/downVoteBlank.png" />
-			</div>
-			<h2>Comment Title</h2>
-			<p>Comment</p>
-			<p>Erstellt am:</p>
-		</div>
-	</div>
-	</div>
-
+ -->
 
 	<!-- Main jumbotron for a primary marketing message or call to action -->
 

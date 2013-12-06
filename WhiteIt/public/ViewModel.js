@@ -2,7 +2,9 @@ function WhiteItViewModel() {
 	var self = this;
 	self.pages = ['AllLinks', 'LinkDetail'];
 	self.boxes = ['Empty', 'Register', 'NewLink'];
-	self.entries = ['asdf', 'ewor8tzwer', 'izdhsljk'];
+	
+	self.entries = ko.observable();
+	$.get("/entries", {} , self.entries)
 	
 	self.currentPage = ko.observable();
 	self.currentEntry = ko.observable();
@@ -29,7 +31,7 @@ function WhiteItViewModel() {
 		
 		//default path
         this.get('', function() { 
-        	this.app.runRoute('get', '#AllLinks'); 
+        	this.app.runRoute('get', '#AllLinks');
     	});
 	});
 }
