@@ -23,10 +23,12 @@
 				</button>
 				<a class="navbar-brand" href="#">whiteIt</a>
 			</div>
-			<div class="navbar-collapse collapse">
+			<div class="navbar-collapse collapse" data-bind="visible: currentUser() == ''">
+				<button data-bind="click: $root.showBox('NewLink')" class="btn btn-success">New
+					Link</button>
 				<form class="navbar-form navbar-right" role="form">
 					<div class="form-group">
-						<input type="text" data-bind="value: user" placeholder="User"
+						<input type="text" data-bind="value: name" placeholder="User"
 							class="form-control">
 					</div>
 					<div class="form-group">
@@ -37,21 +39,35 @@
 						in</button>
 				</form>
 			</div>
+			<div class="navbar-collapse collapse" data-bind="visible: currentUser() != ''">
+				<span>Hi </span><span data-bind="value: currentUser()"></span>
+				<button data-bind="click: $root.logout()" class="btn btn-success">Logout</button>
+			</div>
 			<!--/.navbar-collapse -->
 		</div>
 	</div>
 
-	<!-- Register -->
-
-
 	<!-- New Link -->
-
+	<div class="jumbotron" data-bind="visible: currentBox() == 'NewLink'">
+		<div class="container">
+			<button data-bind="click: $root.closeBox()" class="btn" style="float:right">X</button>
+			<form role="form">
+				<div class="form-group">
+					<input type="text" data-bind="value: newLinkTitle" placeholder="Title" class="form-control"></input>
+				</div>
+				<div class="form-group">
+					<input type="text" data-bind="value: newLinkUrl" placeholder="Url" class="form-control"></input>
+				</div>
+				<button data-bind="click: $root.createLink()" class="btn btn-success">Create Link</button>
+			</form>
+		</div>
+	</div>
+	
 
 	<!-- Message bar -->
 
 	<!-- All Links view -->
-	<div class="jumbotron"
-		data-bind="visible: currentPage() == 'AllLinks'">
+	<div class="jumbotron" data-bind="visible: currentPage() == 'AllLinks'">
 		<div class="container">
 			<div data-bind="foreach: entries">
 				<div id="test">
@@ -70,10 +86,9 @@
 					Created on: <span data-bind="text: $data.createTimeDisplay">
 				</p>
 				<p>
-				<a data-bind="click: function(data, event) { $root.viewLinkDetail($data.id) }">
-					<span
-						data-bind="text: $data.comments.length"></span>
-					Comments</a>
+					<a data-bind="click: function(data, event) { $root.viewLinkDetail($data.id) }">
+						<span data-bind="text: $data.comments.length"></span> Comments
+					</a>
 				</p>
 			</div>
 		</div>
@@ -99,50 +114,52 @@
 
 				<h1>
 					<a data-bind="attr: { href: url }" target="_blank">
-						<h1><span data-bind="text: title"></span></h1>
+						<h1>
+							<span data-bind="text: title"></span>
+						</h1>
 					</a>
 				</h1>
 				<p>
 					Created on: <span data-bind="text: createTimeDisplay">
 				</p>
 				<p>
-				<a data-bind="click: function(data, event) { $root.viewLinkDetail($data.id) }">
-					<span
-						data-bind="text: comments.length"></span>
-					Comments</a>
+					<a
+						data-bind="click: function(data, event) { $root.viewLinkDetail($data.id) }">
+						<span data-bind="text: comments.length"></span> Comments
+					</a>
 				</p>
-							
-				 	
+
+
 
 				<div class="newComment">
 					<!-- TODO -->
 				</div>
-				
-			<div data-bind="foreach: comments">
-				<div>
-					<img src="images/upVoteBlank.png"
-						data-bind="click: function(data, event) { $root.vote($data.id, 'up') }" />
-					<span data-bind="text: rating.value"></span> <img
-						src="images/downVoteBlank.png"
-						data-bind="click: function(data, event) { $root.vote($data.id, 'down') }" />
+
+				<div data-bind="foreach: comments">
+					<div>
+						<img src="images/upVoteBlank.png"
+							data-bind="click: function(data, event) { $root.vote($data.id, 'up') }" />
+						<span data-bind="text: rating.value"></span> <img
+							src="images/downVoteBlank.png"
+							data-bind="click: function(data, event) { $root.vote($data.id, 'down') }" />
+					</div>
+
+					<p>
+						Created by: <span data-bind="text: $data.author">
+					</p>
+					<p>
+						Created on: <span data-bind="text: $data.createTimeDisplay">
+					</p>
+					<p>
+						<span data-bind="text: $data.text">
+					</p>
 				</div>
 
-				<p>
-					Created by: <span data-bind="text: $data.author">
-				</p>
-				<p>
-					Created on: <span data-bind="text: $data.createTimeDisplay">
-				</p>
-				<p>
-					<span data-bind="text: $data.text">
-				</p>
 			</div>
 
-</div>
-
 
 		</div>
-		</div>
+	</div>
 	</div>
 
 
