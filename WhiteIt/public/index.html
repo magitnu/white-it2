@@ -23,6 +23,10 @@
 				</button>
 				<a class="navbar-brand" href="#">whiteIt</a>
 			</div>
+			<div class="navbar-header" data-bind="visible: currentUser() != ''">
+				
+				<button data-bind="click: $root.logout()" class="btn btn-success">Logout</button>
+			</div>
 			<div class="navbar-collapse collapse" data-bind="visible: currentUser() == ''">
 				<button data-bind="click: $root.showBox('NewLink')" class="btn btn-success">New
 					Link</button>
@@ -38,10 +42,6 @@
 					<button data-bind="click: $root.login()" class="btn btn-success">Sign
 						in</button>
 				</form>
-			</div>
-			<div class="navbar-collapse collapse" data-bind="visible: currentUser() != ''">
-				<span>Hi </span><span data-bind="value: currentUser()"></span>
-				<button data-bind="click: $root.logout()" class="btn btn-success">Logout</button>
 			</div>
 			<!--/.navbar-collapse -->
 		</div>
