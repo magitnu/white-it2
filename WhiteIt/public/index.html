@@ -42,9 +42,9 @@
 	</div>
 	
 <!-- Top Boxes -->
-	<div class="jumbotron" style="margin-bottom: 0px; border-bottom: 1px solid #DDD" data-bind="visible: currentBox() != null">
+	<div class="jumbotron topBox" style="margin-bottom: 0px; border-bottom: 1px solid #DDD" data-bind="visible: currentBox() != null">
 		<div class="container">
-			<button data-bind="click: function() { $root.closeBox(); }" class="btn" style="float:right">X</button>
+			<button data-bind="click: function() { $root.closeBox(); }" class="btn" style="font-weight: bold;float:right">X</button>
 			
 		<!-- New Link -->
 			<form role="form" data-bind="visible: currentBox() == 'NewLink'">

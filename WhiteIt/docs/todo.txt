@@ -1,11 +1,11 @@
-[ ] Header
-[ ] Login
-[ ] Register
-[ ] New Link
-[ ] All Links
-[ ] Link Details
-[ ] New Comment
+[X] Header
+[X] Login
+[X] Register
+[X] New Link
+[X] All Links
+[X] Link Details
+[X] New Comment
 
-[ ] Data Access
+[X] Data Access
 [ ] Socket.IO Connection
-[ ] CSS
+[/] CSS

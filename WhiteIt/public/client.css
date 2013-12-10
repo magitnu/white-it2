@@ -1,3 +1,5 @@
-#hidden {
-	visibility: hidden;
+.topBox {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #CCCCCC;
+  background-color: #DDDDDD;
 }
