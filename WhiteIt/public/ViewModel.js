@@ -1,7 +1,7 @@
 function WhiteItViewModel() {
 	var self = this;
 	self.pages = [ 'AllLinks', 'LinkDetail' ];
-	self.boxes = [ 'Empty', 'Register', 'NewLink' ];
+	self.boxes = [ 'Empty', 'Register', 'NewLink', 'NewComment'];
 
 	self.entries = ko.observableArray([]);
 
