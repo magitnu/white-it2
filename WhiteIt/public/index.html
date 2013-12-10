@@ -88,11 +88,10 @@
 				<h1>
 					<a data-bind="attr: { href: $data.url }" target="_blank"><span data-bind="text: $data.title"></span></a>
 				</h1>
-				<div id="vote">
-					<img src="images/upVoteBlank.png" data-bind="click: function() { $root.vote($data.id, 'up') }" /> 
+				<div>
+					<img data-bind="click: function() { $root.vote($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> 
 					<span data-bind="text: $data.rating.value"></span> 
-					<img src="images/downVoteBlank.png" data-bind="click: function() { $root.vote($data.id, 'down') }"
-					/>
+					<img src="images/downVoteBlank.png" data-bind="click: function() { $root.vote($data.id, 'down') }"/>
 				</div>
 				<p>
 					Created on: <span data-bind="text: $data.createTimeDisplay" ></span>

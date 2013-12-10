@@ -22,6 +22,7 @@ function WhiteItViewModel() {
 		$.get("/entries", self.entries);
 	};
 
+	//voting
 	self.vote = function(entryId, vote) {
 		$.post("/entry/" + entryId + "/" + vote);
 		if(self.currentPage() == 'AllLinks') {
@@ -30,6 +31,22 @@ function WhiteItViewModel() {
 			self.getEntry(entryId);
 		}
 	};
+	
+	self.getVoteImg = function(entry, vote) {
+    	var upIndex = entry.rating.upVoters.indexOf(entry.id);
+    	var downIndex = entry.rating.downVoters.indexOf(entry.id);
+    	if(vote == 'up'){
+    		if(upIndex > -1){
+    			return 'images/upVote.png';
+    		}
+    		return 'images/upVoteBlank.png';
+    	} else {
+    		if(downIndex > -1){
+    			return 'images/downVote.png';
+    		}
+    		return 'images/downVoteBlank.png';
+    	}
+	}
 
 	self.viewLinkDetail = function(entryId) {
 		location.hash = "LinkDetail/" + entryId;
