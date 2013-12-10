@@ -24,7 +24,11 @@ function WhiteItViewModel() {
 
 	self.vote = function(entryId, vote) {
 		$.post("/entry/" + entryId + "/" + vote);
-		self.loadEntries();
+		if(self.currentPage() == 'AllLinks') {
+			self.loadEntries();
+		} else {
+			self.getEntry(entryId);
+		}
 	};
 
 	self.viewLinkDetail = function(entryId) {
@@ -112,8 +116,8 @@ function WhiteItViewModel() {
 		this.get('#:page/:entryId', function() {
 			self.currentPage(this.params.page);
 			self.getEntry(this.params.entryId);
-			self.loadEntries();
-			// $.get("/entry/" + this.params.entryId, self.currentEntry);
+			//self.loadEntries();
+			//$.get("/entry/" + this.params.entryId, self.currentEntry);
 		});
 
 		// default path
