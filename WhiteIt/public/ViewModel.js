@@ -78,7 +78,10 @@ function WhiteItViewModel() {
 		$.post("/entry", {
 			title : self.newLinkTitle,
 			url : self.newLinkUrl
-		}, self.loadEntries());
+		}, function() {
+			self.closeBox();
+			self.loadEntries();
+		});
 	};
 	
 	//Register
@@ -88,7 +91,12 @@ function WhiteItViewModel() {
 		$.post("/register", {
 			name : self.newUsername,
 			password : self.newPassword
-		}, self.loadEntries());
+		}, function(success) {
+			if(success)
+				self.closeBox();
+			
+			self.loadEntries();
+		});
 	};
 
 	Sammy(function() {

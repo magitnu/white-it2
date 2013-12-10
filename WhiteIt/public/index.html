@@ -17,14 +17,14 @@
 				</button>
 				<a class="navbar-brand" href="#">whiteIt</a>
 			</div>
-			<div class="navbar-header" data-bind="visible: currentUser() != ''">
-<<<<<<< .mine
-				<button data-bind="click: function() { $root.showBox('NewLink') }" class="btn btn-success">New
-					Link</button>
-				<button data-bind="click: function() { $root.logout() }" class="btn btn-success">Logout</button>
-			</div>
-			<div class="navbar-collapse collapse" data-bind="visible: currentUser() == ''">
-				<form class="navbar-form navbar-right" role="form">
+			<div class="navbar-collapse collapse">
+				<div class="navbar-form navbar-right" data-bind="visible: currentUser() != ''">
+					<!-- TODO -->
+					<span>Hi </span><span data-bind="text: currentUser()" ></span>
+					<button data-bind="click: function() { $root.showBox('NewLink') }" class="btn btn-success">New Link</button>
+					<button data-bind="click: function() { $root.logout() }" class="btn btn-success">Logout</button>
+				</div>
+				<form class="navbar-form navbar-right" role="form" data-bind="visible: currentUser() == ''">
 					<div class="form-group">
 						<input type="text" data-bind="value: name" placeholder="User" class="form-control">
 					</div>
@@ -58,7 +58,7 @@
 	<!-- Register -->
 	<div class="jumbotron" data-bind="visible: currentBox() == 'Register'">
 		<div class="container">
-			<button data-bind="click: $root.closeBox()" class="btn" style="float: right">X</button>
+			<button data-bind="click: function() { $root.closeBox() }" class="btn" style="float: right">X</button>
 			<form role="form">
 				<div class="form-group">
 					<input type="text" data-bind="value: newUsername" placeholder="Username" class="form-control"></input>
@@ -66,7 +66,7 @@
 				<div class="form-group">
 					<input type="password" data-bind="value: newPassword" placeholder="Password" class="form-control"></input>
 				</div>
-				<button data-bind="click: $root.register()" class="btn btn-success">Register</button>
+				<button data-bind="click: function() { $root.register() }" class="btn btn-success">Register</button>
 			</form>
 		</div>
 	</div>
