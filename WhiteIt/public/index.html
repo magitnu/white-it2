@@ -104,35 +104,27 @@
 	<div class="jumbotron" data-bind="visible: currentPage() == 'LinkDetail'">
 		<div class="container">
 
-			<div data-bind="with: currentEntry">
+			<div data-bind="with: $root.currentEntry()">
 
 
 				<div>
-					<img src="images/upVoteBlank.png" data-bind="click: function(data, event) { $root.vote(id, 'up') }" /> <span data-bind="text: rating.value"></span> <img src="images/downVoteBlank.png"
-						data-bind="click: function(data, event) { $root.vote(id, 'down') }"
+					<img src="images/upVoteBlank.png" data-bind="click: function() { $root.vote($data.id, 'up') }" /> <span data-bind="text: rating.value"></span> <img src="images/downVoteBlank.png"
+						data-bind="click: function() { $root.vote($data.id, 'down') }"
 					/>
 				</div>
 
 				<h1>
 					<a data-bind="attr: { href: url }" target="_blank">
-						<h1>
-							<span data-bind="text: title"></span>
-						</h1>
+							<span data-bind="text: $data.title"></span>
 					</a>
 				</h1>
 				<p>
-					Created on: <span data-bind="text: createTimeDisplay">
+					Created on: <span data-bind="text: $data.createTimeDisplay"></span>
 				</p>
 				<p>
-					<a data-bind="click: function(data, event) { $root.viewLinkDetail($data.id) }"> <span data-bind="text: comments.length"></span> Comments
+					<a data-bind="click: function() { $root.viewLinkDetail($data.id) }"> <span data-bind="text: $data.comments.length"></span> Comments
 					</a>
 				</p>
-
-
-
-				<div class="newComment">
-					<!-- TODO -->
-				</div>
 
 				<div data-bind="foreach: comments">
 					<div>
@@ -142,13 +134,13 @@
 					</div>
 
 					<p>
-						Created by: <span data-bind="text: $data.author">
+						Created by: <span data-bind="text: $data.author"></span>
 					</p>
 					<p>
-						Created on: <span data-bind="text: $data.createTimeDisplay">
+						Created on: <span data-bind="text: $data.createTimeDisplay"></span>
 					</p>
 					<p>
-						<span data-bind="text: $data.text">
+						<span data-bind="text: $data.text"></span>
 					</p>
 				</div>
 
@@ -157,16 +149,12 @@
 
 		</div>
 	</div>
-	</div>
-
-
 
 	<hr>
 
 	<footer>
 		<p>&copy; WhiteIt 2013</p>
 	</footer>
-	</div>
 	<!-- /container -->
 
 
@@ -184,6 +172,5 @@
 	<script src="dataService.js"></script>
 	<script src="init.js"></script>
 	<script src="ViewModel.js"></script>
-
 </body>
 </html>

@@ -30,7 +30,7 @@ function WhiteItViewModel() {
 	};
 
 	self.viewLinkDetail = function(entryId) {
-		location.hash = "entry/" + entryId;
+		location.hash = "LinkDetail/" + entryId;
 	};
 
 	// Login/Logout
@@ -47,7 +47,9 @@ function WhiteItViewModel() {
 	// }
 
 	self.getEntry = function(entryId) {
-		$.get("/entry/" + entryId, self.currentEntry);
+		$.get("/entry/" + entryId, {}, function(data) {
+			self.currentEntry(data);
+		});
 	};
 
 	self.login = function() {
