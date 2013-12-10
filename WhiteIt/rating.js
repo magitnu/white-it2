@@ -1,27 +1,33 @@
 module.exports = function Rating() {
     this.value = 0;
-    var upVoters = [];
-    var downVoters = [];
+    this.upVoters = [];
+    this.downVoters = [];
     var self = this;
     
     this._up = function(userId) {
-        if (!upVoters[userId] && !downVoters[userId]) {
+    	var upIndex = self.upVoters.indexOf(userId);
+    	var downIndex = self.downVoters.indexOf(userId);
+    	
+        if (upIndex == -1 && downIndex == -1) {
             self.value++;
-            upVoters[userId] = true;
-        } else if (!upVoters[userId] && downVoters[userId]) {
+            self.upVoters.push(userId);
+        } else if (upIndex == -1 && downIndex > -1) {
         	self.value++;
-        	downVoters[userId] = false;
+        	self.downVoters.splice(downIndex, 1);
         }
         return self.value;
     };
     
     this._down = function (userId) {
-        if (!downVoters[userId] && !upVoters[userId]) {
+    	var upIndex = self.upVoters.indexOf(userId);
+    	var downIndex = self.downVoters.indexOf(userId);
+    	
+        if (downIndex == -1 && upIndex == -1) {
             self.value--;
-            downVoters[userId] = true;
-        } else if (!downVoters[userId] && upVoters[userId]) {
+            self.downVoters.push(userId);
+        } else if (downIndex == -1 && upIndex > -1) {
         	self.value--;
-        	upVoters[userId] = false;
+        	self.upVoters.splice(upIndex, 1);
         }
         return self.value;
     };
