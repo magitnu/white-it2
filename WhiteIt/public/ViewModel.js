@@ -117,8 +117,7 @@ function WhiteItViewModel() {
 			text : self.newLinkComment
 		}, function() {
 			self.closeBox();
-			self.loadEntries();
-			viewLinkDetail(self.currentEntry().id);
+			self.getEntry(self.currentEntry().id);
 		});
 	};
 	
