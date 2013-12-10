@@ -10,8 +10,6 @@ function WhiteItViewModel() {
 	self.currentBox = ko.observable();
 	self.currentUser = ko.observable();
 
-	self.currentBox(null);
-
 	self.showPage = function(page) {
 		location.hash = page;
 	};
@@ -100,6 +98,10 @@ function WhiteItViewModel() {
 			self.loadEntries();
 		});
 	};
+	
+	//Init
+	self.getCurrentUser();
+	self.currentBox(null);
 
 	Sammy(function() {
 		this.get('#:page', function() {
