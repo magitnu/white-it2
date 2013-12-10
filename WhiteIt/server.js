@@ -34,7 +34,7 @@ var comments = [];
 
 //sample data
 entries.push(new Link(entries.length, "Title", "Author", "http://www.google.ch"));
-var comment = new Comment(0, "Super Kommentar, denn hier entsteht ein super Fülltext", "Der Dort");
+var comment = new Comment(0, "Super Kommentar, denn hier entsteht ein super Fï¿½lltext", "Der Dort");
 var comment2 = new Comment(1, "Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet", "Test person");
 comments.push(comment);
 comments.push(comment2);
@@ -137,12 +137,12 @@ app.get('/entry/:id', function(req, res) {
 });
 
 app.post('/entry/:id/up', checkAuth, function (req, res) {
-    res.json(entries[req.params.id].rating._up(req.session.user_id));
+    res.json(entries[req.params.id].rating._up(users[req.session.user_id].name));
     io.sockets.emit('message', { action: "Rated" });
 });
 
 app.post('/entry/:id/down', checkAuth, function (req, res) {
-    res.json(entries[req.params.id].rating._down(req.session.user_id));
+    res.json(entries[req.params.id].rating._down(users[req.session.user_id].name));
     io.sockets.emit('message', { action: "Rated" });
 });
 

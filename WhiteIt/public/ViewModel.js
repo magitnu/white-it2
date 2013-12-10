@@ -33,8 +33,8 @@ function WhiteItViewModel() {
 	};
 	
 	self.getVoteImg = function(entry, vote) {
-    	var upIndex = entry.rating.upVoters.indexOf(entry.id);
-    	var downIndex = entry.rating.downVoters.indexOf(entry.id);
+    	var upIndex = entry.rating.upVoters.indexOf(self.currentUser());
+    	var downIndex = entry.rating.downVoters.indexOf(self.currentUser());
     	if(vote == 'up'){
     		if(upIndex > -1){
     			return 'images/upVote.png';

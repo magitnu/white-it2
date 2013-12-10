@@ -4,13 +4,13 @@ module.exports = function Rating() {
     this.downVoters = [];
     var self = this;
     
-    this._up = function(userId) {
-    	var upIndex = self.upVoters.indexOf(userId);
-    	var downIndex = self.downVoters.indexOf(userId);
+    this._up = function(userName) {
+    	var upIndex = self.upVoters.indexOf(userName);
+    	var downIndex = self.downVoters.indexOf(userName);
     	
         if (upIndex == -1 && downIndex == -1) {
             self.value++;
-            self.upVoters.push(userId);
+            self.upVoters.push(userName);
         } else if (upIndex == -1 && downIndex > -1) {
         	self.value++;
         	self.downVoters.splice(downIndex, 1);
@@ -18,13 +18,13 @@ module.exports = function Rating() {
         return self.value;
     };
     
-    this._down = function (userId) {
-    	var upIndex = self.upVoters.indexOf(userId);
-    	var downIndex = self.downVoters.indexOf(userId);
+    this._down = function (userName) {
+    	var upIndex = self.upVoters.indexOf(userName);
+    	var downIndex = self.downVoters.indexOf(userName);
     	
         if (downIndex == -1 && upIndex == -1) {
             self.value--;
-            self.downVoters.push(userId);
+            self.downVoters.push(userName);
         } else if (downIndex == -1 && upIndex > -1) {
         	self.value--;
         	self.upVoters.splice(upIndex, 1);
