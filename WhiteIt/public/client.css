@@ -1,5 +1,32 @@
-.topBox {
-  margin-bottom: 10px;
-  border-bottom: 1px solid #CCCCCC;
-  background-color: #DDDDDD;
+#hidden {
+	visibility: hidden;
+}
+
+.linkEntry {
+	margin: 50px 0;
+}
+
+.linkEntry h1 {
+	-padding-top: 15px;
+	margin: 0 0 20px;
+}
+
+.linkEntry hr {
+	border: 1px dashed;
+    color: #CCCCCC;
+    margin: 20px 0;
+}
+
+.vote {
+	display: block;
+	float: left;
+	text-align: center;
+	font-size: 1.3em;
+	width: 25px;
+	margin-left: -50px;
+	margin-top: 10px;
+}
+
+.vote img {
+	display: block;
 }
