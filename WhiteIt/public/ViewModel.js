@@ -38,16 +38,7 @@ function WhiteItViewModel() {
 	// Login/Logout
 	self.name = "";
 	self.password = "";
-
-	// self.updateEntry = function(entryId) {
-	// var entry = ko.utils.arrayFirst(self.entries(), function(currentEntry) {
-	// return currentEntry.id == entryId;
-	// });
-	// if (entry) {
-	// console.log(entry);
-	// }
-	// }
-
+	
 	self.getEntry = function(entryId) {
 		$.get("/entry/" + entryId, {}, function(data) {
 			self.currentEntry(data);
@@ -82,9 +73,9 @@ function WhiteItViewModel() {
 		$.post("/entry", {
 			title : self.newLinkTitle,
 			url : self.newLinkUrl
-		}, function() {
+		}, function(res) {
 			self.closeBox();
-			self.loadEntries();
+			self.viewLinkDetail(res.id);
 		});
 	};
 	
@@ -98,8 +89,19 @@ function WhiteItViewModel() {
 		}, function(success) {
 			if(success)
 				self.closeBox();
-			
 			self.loadEntries();
+		});
+	};
+	
+	//New Comment
+	self.newLinkComment = "";
+	self.createComment = function() {
+		$.post("/entry/" + self.currentEntry().id + "/comment", {
+			text : self.newLinkComment
+		}, function() {
+			self.closeBox();
+			self.loadEntries();
+			viewLinkDetail(self.currentEntry().id);
 		});
 	};
 	
@@ -111,6 +113,8 @@ function WhiteItViewModel() {
 		this.get('#:page', function() {
 			self.currentPage(this.params.page);
 			self.currentEntry(null);
+			if(self.currentBox() == 'NewComment')
+				self.showBox(null);
 		});
 
 		this.get('#:page/:entryId', function() {
