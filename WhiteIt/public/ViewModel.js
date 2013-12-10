@@ -48,7 +48,7 @@ function WhiteItViewModel() {
 
 	self.getEntry = function(entryId) {
 		$.get("/entry/" + entryId, self.currentEntry);
-	}
+	};
 
 	self.login = function() {
 		$.post("/login", {
@@ -66,7 +66,7 @@ function WhiteItViewModel() {
 			self.currentUser(res);
 		});
 	};
-
+	
 	self.closeBox = function() {
 		self.showBox(null);
 	};

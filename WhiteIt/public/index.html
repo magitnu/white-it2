@@ -18,11 +18,12 @@
 				<a class="navbar-brand" href="#">whiteIt</a>
 			</div>
 			<div class="navbar-header" data-bind="visible: currentUser() != ''">
-
-				<button data-bind="click: $root.logout()" class="btn btn-success">Logout</button>
+<<<<<<< .mine
+				<button data-bind="click: function() { $root.showBox('NewLink') }" class="btn btn-success">New
+					Link</button>
+				<button data-bind="click: function() { $root.logout() }" class="btn btn-success">Logout</button>
 			</div>
 			<div class="navbar-collapse collapse" data-bind="visible: currentUser() == ''">
-				<button data-bind="click: $root.showBox('NewLink')" class="btn btn-success">New Link</button>
 				<form class="navbar-form navbar-right" role="form">
 					<div class="form-group">
 						<input type="text" data-bind="value: name" placeholder="User" class="form-control">
@@ -30,8 +31,8 @@
 					<div class="form-group">
 						<input type="password" data-bind="value: password" placeholder="Password" class="form-control">
 					</div>
-					<button data-bind="click: $root.login()" class="btn btn-success">Sign in</button>
-					<button data-bind="click: $root.showBox('Register')" class="btn btn-success">Register</button>
+					<button data-bind="click: function() { $root.login() }" class="btn btn-success">Sign in</button>
+					<button data-bind="click: function() { $root.showBox('Register') }" class="btn btn-success">Register</button>
 				</form>
 			</div>
 			<!--/.navbar-collapse -->
@@ -41,7 +42,7 @@
 	<!-- New Link -->
 	<div class="jumbotron" data-bind="visible: currentBox() == 'NewLink'">
 		<div class="container">
-			<button data-bind="click: $root.closeBox()" class="btn" style="float: right">X</button>
+			<button data-bind="click: function() { $root.closeBox(); }" class="btn" style="float:right">X</button>
 			<form role="form">
 				<div class="form-group">
 					<input type="text" data-bind="value: newLinkTitle" placeholder="Title" class="form-control"></input>
@@ -49,7 +50,7 @@
 				<div class="form-group">
 					<input type="text" data-bind="value: newLinkUrl" placeholder="Url" class="form-control"></input>
 				</div>
-				<button data-bind="click: $root.createLink()" class="btn btn-success">Create Link</button>
+				<button data-bind="click: function() { $root.createLink() }" class="btn btn-success">Create Link</button>
 			</form>
 		</div>
 	</div>
@@ -87,7 +88,7 @@
 					<a data-bind="attr: { href: $data.url }" target="_blank"><span data-bind="text: $data.title"></span></a>
 				</h1>
 				<p>
-					Created on: <span data-bind="text: $data.createTimeDisplay">
+					Created on: <span data-bind="text: $data.createTimeDisplay" ></span>
 				</p>
 				<p>
 					<a data-bind="click: function(data, event) { $root.viewLinkDetail($data.id) }"> <span data-bind="text: $data.comments.length"></span> Comments
