@@ -9,6 +9,23 @@ function WhiteItViewModel() {
 	self.currentEntry = ko.observable();
 	self.currentBox = ko.observable();
 	self.currentUser = ko.observable();
+	
+	self.messages = ko.observableArray();
+	self.addMessage = function(msg) {
+		self.clearMessagesIn(0);
+		ko.utils.arrayForEach(msg, function(value) {
+			self.messages.push({message: value});
+		});
+		self.clearMessagesIn(10);
+	};
+	self.clearMessagesIn = function(wait) {
+		if(wait == 0)
+    		self.messages.removeAll();
+		else
+		    setTimeout(function () {
+	    		self.messages.removeAll();
+		    }, wait * 1000);
+	};
 
 	self.showPage = function(page) {
 		location.hash = page;
@@ -73,11 +90,21 @@ function WhiteItViewModel() {
 		$.post("/login", {
 			name : self.name,
 			password : self.password
-		}, self.getCurrentUser());
+		}, function(res) {
+			if(res) {
+				self.getCurrentUser();
+				self.addMessage(["Welcome back, " + self.currentUser() + "!"]);
+			}
+			else 
+				self.addMessage(["Username and password do not match"]);
+		});
 	};
 
 	self.logout = function() {
-		$.post("/logout", {}, self.getCurrentUser());
+		$.post("/logout", {}, function() {
+			self.addMessage(["See you soon, " + self.currentUser() + "!"]);
+			self.getCurrentUser();
+		});
 	};
 
 	self.getCurrentUser = function(data) {
@@ -99,6 +126,7 @@ function WhiteItViewModel() {
 			url : self.newLinkUrl
 		}, function(res) {
 			self.closeBox();
+			self.addMessage(["Thank you for your Link"]);
 			self.viewLinkDetail(res.id);
 		});
 	};
@@ -106,15 +134,24 @@ function WhiteItViewModel() {
 	// Register
 	self.newUsername = "";
 	self.newPassword = "";
+	self.newPasswordRepeat = "";
 	self.register = function() {
-		$.post("/register", {
-			name : self.newUsername,
-			password : self.newPassword
-		}, function(success) {
-			if (success)
-				self.closeBox();
-			self.loadEntries();
-		});
+		if(self.newPassword != self.newPasswordRepeat)
+			self.addMessage(["Passwords do not match"]);
+		else {
+			$.post("/register", {
+				name : self.newUsername,
+				password : self.newPassword
+			}, function(success) {
+				if (success) {
+					self.addMessage(["You have been successfuly registered."]);
+					self.closeBox();
+				} else {
+					self.addMessage(["There was a problem with your registration. Probably the username has already been choosen."])
+				}
+				self.loadEntries();
+			});
+		}
 	};
 
 	// New Comment
@@ -124,6 +161,7 @@ function WhiteItViewModel() {
 			text : self.newLinkComment
 		}, function() {
 			self.closeBox();
+			self.addMessage(["Thank you for your comment"]);
 			self.loadEntry(self.currentEntry().id);
 		});
 	};

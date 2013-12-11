@@ -1,4 +1,4 @@
-#hidden {
+#hidden {CC
 	visibility: hidden;
 }
 
@@ -29,4 +29,18 @@
 
 .vote img {
 	display: block;
+}
+
+.topBox {
+	margin-bottom: 0px; 
+	border-bottom: 1px solid #CCC;
+	background-color: #DDD;
+	padding-bottom: 15px;
+}
+.messages {
+	margin-bottom: 0px; 
+	border-bottom: 1px solid #9999FF;
+	background-color: #99CCFF;
+	padding-bottom: 5px;
+	padding-top: 5px;
 }
