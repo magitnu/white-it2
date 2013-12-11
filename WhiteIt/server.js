@@ -129,7 +129,7 @@ app.post('/entry', function(req, res) {
     var newLink = new Link(entries.length, req.body.title, users[req.session.user_id].name, req.body.url);	
  	entries.push(newLink);
  	res.json(newLink);
- 	io.sockets.emit('message', { action: "AddLink" });
+ 	io.sockets.emit('message', { action: "AddLink", entryId: newLink.id });
 });
 
 app.get('/entry/:id', function(req, res) {
@@ -138,12 +138,12 @@ app.get('/entry/:id', function(req, res) {
 
 app.post('/entry/:id/up', checkAuth, function (req, res) {
     res.json(entries[req.params.id].rating._up(users[req.session.user_id].name));
-    io.sockets.emit('message', { action: "Rated" });
+    io.sockets.emit('message', { action: "Rated", entryId: req.params.id });
 });
 
 app.post('/entry/:id/down', checkAuth, function (req, res) {
     res.json(entries[req.params.id].rating._down(users[req.session.user_id].name));
-    io.sockets.emit('message', { action: "Rated" });
+    io.sockets.emit('message', { action: "Rated", entryId: req.params.id });
 });
 
 app.post('/entry/:id/comment', checkAuth, function (req, res) {
@@ -153,7 +153,7 @@ app.post('/entry/:id/comment', checkAuth, function (req, res) {
     var entry = entries[req.params.id];
     entry.comments.push(newComment);
     res.json(newComment);
-    io.sockets.emit('message', { action: "AddComment" });
+    io.sockets.emit('message', { action: "AddComment", entryId: req.params.id });
 });
 
 app.post('/comment/:id/', checkAuth, function (req, res) {
@@ -163,17 +163,17 @@ app.post('/comment/:id/', checkAuth, function (req, res) {
     var comment = comments[req.params.id];
     comment.comments.push(newComment);
     res.json(newComment);
-    io.sockets.emit('message', { action: "AddComment" });
+    io.sockets.emit('message', { action: "AddComment", entryId: req.params.id });
 });
 
 app.post('/comment/:id/up', checkAuth, function (req, res) {
     res.json(comments[req.params.id].rating._up(req.session.user_id));
-    io.sockets.emit('message', { action: "Rated" });
+    io.sockets.emit('message', { action: "Rated", entryId: req.params.id });
 });
 
 app.post('/comment/:id/down', checkAuth, function (req, res) {
     res.json(comments[req.params.id].rating._down(req.session.user_id));
-    io.sockets.emit('message', { action: "Rated" });
+    io.sockets.emit('message', { action: "Rated", entryId: req.params.id });
 });
 
 app.post('/logout', function (req, res) {
