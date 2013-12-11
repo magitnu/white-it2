@@ -1,7 +1,7 @@
 function WhiteItViewModel() {
 	var self = this;
 	self.pages = [ 'AllLinks', 'LinkDetail' ];
-	self.boxes = [ 'Empty', 'Register', 'NewLink', 'NewComment'];
+	self.boxes = [ 'Empty', 'Register', 'NewLink', 'NewComment' ];
 
 	self.entries = ko.observableArray([]);
 
@@ -18,34 +18,41 @@ function WhiteItViewModel() {
 		self.currentBox(box);
 	};
 
+	// load Server Data
 	self.loadEntries = function() {
 		$.get("/entries", self.entries);
 	};
 
-	//voting
+	self.loadEntry = function(entryId) {
+		$.get("/entry/" + entryId, {}, function(data) {
+			self.currentEntry(data);
+		});
+	};
+
+	// voting
 	self.vote = function(entryId, vote) {
 		$.post("/entry/" + entryId + "/" + vote);
-		if(self.currentPage() == 'AllLinks') {
+		if (self.currentPage() == 'AllLinks') {
 			self.loadEntries();
 		} else {
-			self.getEntry(entryId);
+			self.loadEntry(entryId);
 		}
 	};
-	
+
 	self.getVoteImg = function(entry, vote) {
-    	var upIndex = entry.rating.upVoters.indexOf(self.currentUser());
-    	var downIndex = entry.rating.downVoters.indexOf(self.currentUser());
-    	if(vote == 'up'){
-    		if(upIndex > -1){
-    			return 'images/upVote.png';
-    		}
-    		return 'images/upVoteBlank.png';
-    	} else {
-    		if(downIndex > -1){
-    			return 'images/downVote.png';
-    		}
-    		return 'images/downVoteBlank.png';
-    	}
+		var upIndex = entry.rating.upVoters.indexOf(self.currentUser());
+		var downIndex = entry.rating.downVoters.indexOf(self.currentUser());
+		if (vote == 'up') {
+			if (upIndex > -1) {
+				return 'images/upVote.png';
+			}
+			return 'images/upVoteBlank.png';
+		} else {
+			if (downIndex > -1) {
+				return 'images/downVote.png';
+			}
+			return 'images/downVoteBlank.png';
+		}
 	}
 
 	self.viewLinkDetail = function(entryId) {
@@ -55,12 +62,6 @@ function WhiteItViewModel() {
 	// Login/Logout
 	self.name = "";
 	self.password = "";
-	
-	self.getEntry = function(entryId) {
-		$.get("/entry/" + entryId, {}, function(data) {
-			self.currentEntry(data);
-		});
-	};
 
 	self.login = function() {
 		$.post("/login", {
@@ -78,7 +79,7 @@ function WhiteItViewModel() {
 			self.currentUser(res);
 		});
 	};
-	
+
 	self.closeBox = function() {
 		self.showBox(null);
 	};
@@ -95,8 +96,8 @@ function WhiteItViewModel() {
 			self.viewLinkDetail(res.id);
 		});
 	};
-	
-	//Register
+
+	// Register
 	self.newUsername = "";
 	self.newPassword = "";
 	self.register = function() {
@@ -104,40 +105,41 @@ function WhiteItViewModel() {
 			name : self.newUsername,
 			password : self.newPassword
 		}, function(success) {
-			if(success)
+			if (success)
 				self.closeBox();
 			self.loadEntries();
 		});
 	};
-	
-	//New Comment
+
+	// New Comment
 	self.newLinkComment = "";
 	self.createComment = function() {
 		$.post("/entry/" + self.currentEntry().id + "/comment", {
 			text : self.newLinkComment
 		}, function() {
 			self.closeBox();
-			self.getEntry(self.currentEntry().id);
+			self.loadEntry(self.currentEntry().id);
 		});
 	};
-	
-	//Init
+
+	// Init
 	self.getCurrentUser();
 	self.currentBox(null);
 
+	// Sammy.js
 	Sammy(function() {
 		this.get('#:page', function() {
 			self.currentPage(this.params.page);
 			self.currentEntry(null);
-			if(self.currentBox() == 'NewComment')
+			if (self.currentBox() == 'NewComment')
 				self.showBox(null);
 		});
 
 		this.get('#:page/:entryId', function() {
 			self.currentPage(this.params.page);
-			self.getEntry(this.params.entryId);
-			//self.loadEntries();
-			//$.get(§"/entry/" + this.params.entryId, self.currentEntry);
+			self.loadEntry(this.params.entryId);
+			// self.loadEntries();
+			// $.get(ï¿½"/entry/" + this.params.entryId, self.currentEntry);
 		});
 
 		// default path
@@ -147,17 +149,21 @@ function WhiteItViewModel() {
 		});
 	}).run();
 }
-ko.applyBindings(new WhiteItViewModel());
 
+// create viewModel and apply bindings
+var viewModel = new WhiteItViewModel();
+ko.applyBindings(viewModel);
+
+// Socket.io
 var socket = io.connect('http://localhost:4730/');
 
 socket.on('message', function(param) {
-	switch(param.action) {
+	switch (param.action) {
 	case 'AddLink':
-		console.log(1);
+		viewModel.loadEntries();
 		break;
 	case 'Rated':
-		console.log(2);
+		viewModel.loadEntries();
 		break;
 	case 'AddComment':
 		console.log(3);
