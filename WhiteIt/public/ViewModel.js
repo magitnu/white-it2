@@ -39,6 +39,12 @@ function WhiteItViewModel() {
 		}
 	};
 
+	self.voteComment = function(commentId, vote) {
+			$.post("/comment/" + commentId + "/" + vote);
+			console.log(self.currentEntry());
+			self.getEntry(self.currentEntry().id);
+	};
+	
 	self.getVoteImg = function(entry, vote) {
 		var upIndex = entry.rating.upVoters.indexOf(self.currentUser());
 		var downIndex = entry.rating.downVoters.indexOf(self.currentUser());

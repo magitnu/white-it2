@@ -34,7 +34,7 @@ var comments = [];
 
 //sample data
 entries.push(new Link(entries.length, "Title", "Author", "http://www.google.ch"));
-var comment = new Comment(0, "Super Kommentar, denn hier entsteht ein super F�lltext", "Der Dort");
+var comment = new Comment(0, "Super Kommentar, denn hier entsteht ein super Fuelltext", "Der Dort");
 var comment2 = new Comment(1, "Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet", "Test person");
 comments.push(comment);
 comments.push(comment2);

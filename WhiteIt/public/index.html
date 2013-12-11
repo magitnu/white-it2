@@ -114,30 +114,36 @@
 
 			<div data-bind="with: $root.currentEntry()">
 
-				<h1>
-					<a data-bind="attr: { href: url }" target="_blank"> <span data-bind="text: $data.title"></span>
-					</a>
-				</h1>
-				<div>
-					<img data-bind="click: function() { $root.vote($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
-						data-bind="click: function() { $root.vote($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
-					/>
-				</div>
-				<p>
-					Created on: <span data-bind="text: $data.createTimeDisplay"></span>
-				</p>
-				<p>
-					<a data-bind="click: function() { $root.viewLinkDetail($data.id) }"> <span data-bind="text: $data.comments.length"></span> Comments
-					</a>
-				</p>
-
-				<div data-bind="foreach: comments">
-					<div>
-						<img src="images/upVoteBlank.png" data-bind="click: function() { $root.vote($data.id, 'up') }" /> <span data-bind="text: rating.value"></span> <img src="images/downVoteBlank.png"
-							data-bind="click: function() { $root.vote($data.id, 'down') }"
+				<div class="linkEntry">
+					<div class="vote">
+						<img data-bind="click: function() { $root.vote($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
+							data-bind="click: function() { $root.vote($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
 						/>
 					</div>
+					<h1>
+						<a data-bind="attr: { href: $data.url }" target="_blank"><span data-bind="text: $data.title"></span></a>
+					</h1>
+					<p>
+						Created on: <span data-bind="text: $data.createTimeDisplay"></span>
+					</p>
+					<p>
+						<a data-bind="click: function() { $root.viewLinkDetail($data.id) }"> <span data-bind="text: $data.comments.length"></span> Comments
+						</a>
+					</p>
+					<hr />
+				</div>
 
+				<div data-bind="foreach: comments">
+							
+				<div class="linkEntry">
+					<div class="vote">
+						<img data-bind="click: function() { $root.voteComment($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
+							data-bind="click: function() { $root.voteComment($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
+						/>
+					</div>
+					<h1>
+						<a data-bind="attr: { href: $data.url }" target="_blank"><span data-bind="text: $data.title"></span></a>
+					</h1>
 					<p>
 						Created by: <span data-bind="text: $data.author"></span>
 					</p>
@@ -147,6 +153,8 @@
 					<p>
 						<span data-bind="text: $data.text"></span>
 					</p>
+					<hr />
+				</div>				
 				</div>
 
 			</div>
