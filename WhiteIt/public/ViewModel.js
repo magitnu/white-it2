@@ -137,7 +137,7 @@ function WhiteItViewModel() {
 			self.currentPage(this.params.page);
 			self.getEntry(this.params.entryId);
 			//self.loadEntries();
-			//$.get("/entry/" + this.params.entryId, self.currentEntry);
+			//$.get(§"/entry/" + this.params.entryId, self.currentEntry);
 		});
 
 		// default path
@@ -148,3 +148,25 @@ function WhiteItViewModel() {
 	}).run();
 }
 ko.applyBindings(new WhiteItViewModel());
+
+var socket = io.connect('http://localhost:4730/');
+
+socket.on('message', function(param) {
+	switch(param.action) {
+	case 'AddLink':
+		console.log(1);
+		break;
+	case 'Rated':
+		console.log(2);
+		break;
+	case 'AddComment':
+		console.log(3);
+		break;
+	case 'connect':
+		console.log(4);
+		break;
+	case 'disconnect':
+		console.log(5);
+		break;
+	}
+});
