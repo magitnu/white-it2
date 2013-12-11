@@ -3,7 +3,7 @@
 <head>
 <title>InTeTestat</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link href="Libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+<link href="Libs/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
 <link href="client.css" rel="stylesheet" />
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet" />
 </head>
@@ -15,12 +15,12 @@
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">whiteIt</a>
+				<a class="navbar-brand" href="#">WhiteIt</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<div class="navbar-form navbar-right" data-bind="visible: currentUser() != ''">
 					<!-- TODO -->
-					<span style="font-color: white;">Hi <span data-bind="text: currentUser()"></span></span>
+					<span class="navbar-message">Hi <span data-bind="text: currentUser()"></span> you are logged in!</span>
 					<button data-bind="click: function() { $root.showBox('NewComment') },
 									   visible: currentPage() == 'LinkDetail'" class="btn btn-success">New Comment</button>
 					<button data-bind="click: function() { $root.showBox('NewLink') }" class="btn btn-success">New Link</button>
