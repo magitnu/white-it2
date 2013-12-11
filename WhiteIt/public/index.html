@@ -20,7 +20,7 @@
 			<div class="navbar-collapse collapse">
 				<div class="navbar-form navbar-right" data-bind="visible: currentUser() != ''">
 					<!-- TODO -->
-					<span class="navbar-message">Hi <span data-bind="text: currentUser()"></span> you are logged in!</span>
+					<span class="navbar-message">Hi <span data-bind="text: currentUser()"></span>, you are logged in!</span>
 					<button data-bind="click: function() { $root.showBox('NewComment') },
 									   visible: currentPage() == 'LinkDetail'" class="btn btn-success">New Comment</button>
 					<button data-bind="click: function() { $root.showBox('NewLink') }" class="btn btn-success">New Link</button>
