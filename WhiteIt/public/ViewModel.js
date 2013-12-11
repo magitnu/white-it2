@@ -160,13 +160,23 @@ var socket = io.connect('http://localhost:4730/');
 socket.on('message', function(param) {
 	switch (param.action) {
 	case 'AddLink':
-		viewModel.loadEntries();
+		if(viewModel.currentPage() == 'AllLinks') {
+			viewModel.loadEntries();
+		}
 		break;
 	case 'Rated':
-		viewModel.loadEntries();
+		if(viewModel.currentPage() == 'AllLinks') {
+			viewModel.loadEntries();
+		} else if (viewModel.currentEntry().id == param.entryId) {
+			viewModel.loadEntry(param.entryId);
+		}
 		break;
 	case 'AddComment':
-		console.log(3);
+		if(viewModel.currentPage() == 'AllLinks') {
+			viewModel.loadEntries();
+		} else if (viewModel.currentEntry().id == param.entryId) {
+			viewModel.loadEntry(param.entryId);
+		}
 		break;
 	case 'connect':
 		console.log(4);
