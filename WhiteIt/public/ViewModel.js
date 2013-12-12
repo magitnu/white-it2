@@ -58,8 +58,7 @@ function WhiteItViewModel() {
 
 	self.voteComment = function(commentId, vote) {
 			$.post("/comment/" + commentId + "/" + vote);
-			console.log(self.currentEntry());
-			self.getEntry(self.currentEntry().id);
+			self.loadEntry(self.currentEntry().id);
 	};
 	
 	self.getVoteImg = function(entry, vote) {
@@ -67,14 +66,14 @@ function WhiteItViewModel() {
 		var downIndex = entry.rating.downVoters.indexOf(self.currentUser());
 		if (vote == 'up') {
 			if (upIndex > -1) {
-				return 'images/upVote.png';
+				return '/images/upVote.png';
 			}
-			return 'images/upVoteBlank.png';
+			return '/images/upVoteBlank.png';
 		} else {
 			if (downIndex > -1) {
-				return 'images/downVote.png';
+				return '/images/downVote.png';
 			}
-			return 'images/downVoteBlank.png';
+			return '/images/downVoteBlank.png';
 		}
 	}
 

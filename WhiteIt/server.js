@@ -167,12 +167,13 @@ app.post('/comment/:id/', checkAuth, function (req, res) {
 });
 
 app.post('/comment/:id/up', checkAuth, function (req, res) {
-    res.json(comments[req.params.id].rating._up(req.session.user_id));
+    res.json(comments[req.params.id].rating._up(users[req.session.user_id].name));
+//    res.json(comments[req.params.id].rating._up(req.session.user_id));
     io.sockets.emit('message', { action: "Rated", entryId: req.params.id });
 });
 
 app.post('/comment/:id/down', checkAuth, function (req, res) {
-    res.json(comments[req.params.id].rating._down(req.session.user_id));
+    res.json(comments[req.params.id].rating._down(users[req.session.user_id].name));
     io.sockets.emit('message', { action: "Rated", entryId: req.params.id });
 });
 
