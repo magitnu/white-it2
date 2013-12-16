@@ -115,8 +115,9 @@
 			<div data-bind="foreach: entries">
 				<div class="linkEntry">
 					<div class="vote">
-						<img data-bind="click: function() { $root.vote($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
-							data-bind="click: function() { $root.vote($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
+						<img data-bind="click: function() { $root.vote($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> 
+						<span data-bind="text: $data.rating.value"></span> 
+						<img data-bind=" click: function() { $root.vote($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
 						/>
 					</div>
 					<h1>
