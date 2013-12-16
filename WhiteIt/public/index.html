@@ -116,8 +116,8 @@
 			<div data-bind="foreach: entries">
 				<div class="linkEntry">
 					<div class="vote">
-						<img data-bind="style: { opacity: $root.currentUser() != '' ?  1 : 0.2 }, click: function() { $root.vote($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
-							data-bind="style: { opacity: $root.currentUser() != '' ?  1 : 0.2 }, click: function() { $root.vote($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
+						<img data-bind="style: { opacity: $root.currentUser() != '' ?  '' : 0.2 }, click: function() { $root.vote($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
+							data-bind="style: { opacity: $root.currentUser() != '' ?  '' : 0.2 }, click: function() { $root.vote($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
 						/>
 					</div>
 					<h1>
@@ -144,8 +144,8 @@
 
 				<div class="linkEntry">
 					<div class="vote">
-						<img data-bind="style: { opacity: $root.currentUser() != '' ?  1 : 0.2 }, click: function() { $root.vote($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
-							data-bind="style: { opacity: $root.currentUser() != '' ?  1 : 0.2 }, click: function() { $root.vote($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
+						<img data-bind="style: { opacity: $root.currentUser() != '' ?  '' : 0.2 }, click: function() { $root.vote($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
+							data-bind="style: { opacity: $root.currentUser() != '' ?  '' : 0.2 }, click: function() { $root.vote($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
 						/>
 					</div>
 					<h1>
@@ -160,8 +160,8 @@
 				<div class="linkComment" data-bind="foreach: comments">
 					<div class="linkEntry">
 						<div class="vote">
-							<img data-bind="style: { opacity: $root.currentUser() != '' ?  1 : 0.2 }, click: function() { $root.voteComment($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
-								data-bind="style: { opacity: $root.currentUser() != '' ?  1 : 0.2 }, click: function() { $root.voteComment($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
+							<img data-bind="style: { opacity: $root.currentUser() != '' ?  '' : 0.2 }, click: function() { $root.voteComment($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
+								data-bind="style: { opacity: $root.currentUser() != '' ?  '' : 0.2 }, click: function() { $root.voteComment($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
 							/>
 						</div>
 						<h1>
