@@ -11,7 +11,13 @@ function WhiteItViewModel() {
 	self.currentUser = ko.observable();
 	self.currentMessage = ko.observable();
 	self.currentMessageType = ko.observable();
+	self.newUsername = ko.observable();
+	self.newPassword = ko.observable();
+	self.newPasswordRepeat = ko.observable();
+	self.name = ko.observable();
+	self.password = ko.observable();
 
+	// Notifications
 	self.addMessage = function(msg) {
 		self.clearMessagesIn(0);
 		self.currentMessage(msg.text);
@@ -31,6 +37,7 @@ function WhiteItViewModel() {
 		}
 	};
 
+	// Show Site Elements
 	self.showPage = function(page) {
 		location.hash = page;
 	};
@@ -56,7 +63,7 @@ function WhiteItViewModel() {
 		});
 	};
 
-	// voting
+	// Voting
 	self.vote = function(entryId, vote) {
 		$.post("/entry/" + entryId + "/" + vote);
 		if (self.currentPage() == 'AllLinks') {
@@ -92,27 +99,49 @@ function WhiteItViewModel() {
 	};
 
 	// Register
-	self.newUsername = "";
-	self.newPassword = "";
 	self.register = function() {
-		$.post("/register", {
-			name : self.newUsername,
-			password : self.newPassword
-		}, function(success) {
-			if (success)
-				self.closeBox();
-			self.loadEntries();
-		});
+		if (self.newPassword() != self.newPasswordRepeat())
+			self.addMessage({
+				text : "Passwords do not match",
+				css : 'error'
+			});
+		else {
+			$
+					.post(
+							"/register",
+							{
+								name : self.newUsername(),
+								password : self.newPassword()
+							},
+							function(success) {
+								if (success) {
+									self
+											.addMessage({
+												text : "You have been successfuly registered.",
+												css : 'info'
+											});
+									self.newUsername('');
+									self.newPassword('');
+									self.newPasswordRepeat('');
+									self.loadCurrentUser();
+									self.closeBox();
+								} else {
+									self
+											.addMessage({
+												text : "There was a problem with your registration. Probably the username has already been choosen.",
+												css : 'error'
+											});
+								}
+								self.loadEntries();
+							});
+		}
 	};
 
 	// Login/Logout
-	self.name = "";
-	self.password = "";
-
 	self.login = function() {
 		$.post("/login", {
-			name : self.name,
-			password : self.password
+			name : self.name(),
+			password : self.password()
 		}, function(res) {
 			if (res) {
 				$.get("/login", {}, function(res) {
@@ -122,6 +151,8 @@ function WhiteItViewModel() {
 						css : 'info'
 					});
 				});
+				self.name('');
+				self.password('');
 				self.loadCurrentUser();
 			} else
 				self.addMessage({
@@ -162,45 +193,6 @@ function WhiteItViewModel() {
 			self.newLinkUrl('');
 			self.viewLinkDetail(res.id);
 		});
-	};
-
-	// Register
-	self.newUsername = "";
-	self.newPassword = "";
-	self.newPasswordRepeat = "";
-	self.register = function() {
-		if (self.newPassword != self.newPasswordRepeat)
-			self.addMessage({
-				text : "Passwords do not match",
-				css : 'error'
-			});
-		else {
-			$
-					.post(
-							"/register",
-							{
-								name : self.newUsername,
-								password : self.newPassword
-							},
-							function(success) {
-								if (success) {
-									self
-											.addMessage({
-												text : "You have been successfuly registered.",
-												css : 'info'
-											});
-									self.loadCurrentUser();
-									self.closeBox();
-								} else {
-									self
-											.addMessage({
-												text : "There was a problem with your registration. Probably the username has already been choosen.",
-												css : 'error'
-											});
-								}
-								self.loadEntries();
-							});
-		}
 	};
 
 	// New Comment
