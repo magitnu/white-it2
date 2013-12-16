@@ -43,23 +43,22 @@
 	
 	<div style="padding-top: 51px;">
 		<!-- Messages -->
-		<div data-bind="visible: messages().length > 0, foreach: messages()">
-			<div class="jumbotron messages">
+		<div data-bind="fadeVisible: currentMessage() != ''">
+			<div class="jumbotron messages" data-bind="css: { 'info': currentMessageType() == 'info', 'warning': currentMessageType() == 'warning', 'error': currentMessageType() == 'error'}">
 				<div class="container">
-					<span data-bind="text: message"></span>
+					<span data-bind="text: currentMessage()"></span>
 				</div>
 			</div>
 		</div>
 		
 	
-		<!-- Top Boxes -->
-		<div class="jumbotron topBox" data-bind="visible: currentBox() != null">
+	<!-- Top Boxes -->
+		<!-- New Link -->
+		<div class="jumbotron topBox" data-bind="fadeVisible: currentBox() == 'NewLink'">
 			<div class="container">
-	
 				<button data-bind="click: function() { $root.closeBox(); }" class="btn" style="font-weight: bold;float:right">X</button>
 				
-			<!-- New Link -->
-				<form role="form" data-bind="visible: currentBox() == 'NewLink'">
+				<form role="form">
 					<h2>New Link</h2>
 					<div class="form-group">
 						<input type="text" data-bind="value: newLinkTitle" placeholder="Title" class="form-control"></input>
@@ -69,9 +68,15 @@
 					</div>
 					<button data-bind="click: function() { $root.createLink() }" class="btn btn-success">Create Link</button>
 				</form>
-	
-				<!-- Register -->
-				<form role="form" data-bind="visible: currentBox() == 'Register'">
+			</div>
+		</div>
+		
+		<!-- Register -->
+		<div class="jumbotron topBox" data-bind="fadeVisible: currentBox() == 'Register'">
+			<div class="container">
+				<button data-bind="click: function() { $root.closeBox(); }" class="btn" style="font-weight: bold;float:right">X</button>
+				
+				<form role="form">
 					<h2>Register</h2>
 					<div class="form-group">
 						<input type="text" data-bind="value: newUsername" placeholder="Username" class="form-control"></input>
@@ -85,8 +90,15 @@
 					<button data-bind="click: function() { $root.register() }" class="btn btn-success">Register</button>
 				</form>
 	
-				<!-- New Comment -->
-				<form role="form" data-bind="visible: currentBox() == 'NewComment'">
+			</div>
+		</div>
+		
+		<!-- New Comment -->
+		<div class="jumbotron topBox" data-bind="fadeVisible: currentBox() == 'NewComment'">
+			<div class="container">
+				<button data-bind="click: function() { $root.closeBox(); }" class="btn" style="font-weight: bold;float:right">X</button>
+				
+				<form role="form">
 					<h2>New Comment</h2>
 					<div class="form-group">
 						<textarea data-bind="value: newLinkComment" placeholder="Comment" class="form-control"></textarea>
@@ -95,32 +107,33 @@
 				</form>
 			</div>
 		</div>
-	
-		<!-- All Links view -->
-		<div class="jumbotron" data-bind="visible: currentPage() == 'AllLinks'">
-			<div class="container">
-				<div data-bind="foreach: entries">
-					<div class="linkEntry">
-						<div class="vote">
-							<img data-bind="click: function() { $root.vote($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
-								data-bind="click: function() { $root.vote($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
-							/>
-						</div>
-						<h1>
-							<a data-bind="attr: { href: $data.url }" target="_blank"><span data-bind="text: $data.title"></span></a>
-						</h1>
-						<p>
-							Created on: <span data-bind="text: $data.createTimeDisplay"></span>
-						</p>
-						<p>
-							<a data-bind="click: function() { $root.viewLinkDetail($data.id) }"> <span data-bind="text: $data.comments.length"></span> Comments
-							</a>
-						</p>
-						<hr />
+	</div>
+
+	<!-- All Links view -->
+	<div class="jumbotron" data-bind="visible: currentPage() == 'AllLinks'">
+		<div class="container">
+			<div data-bind="foreach: entries">
+				<div class="linkEntry">
+					<div class="vote">
+						<img data-bind="click: function() { $root.vote($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
+							data-bind="click: function() { $root.vote($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
+						/>
 					</div>
+					<h1>
+						<a data-bind="attr: { href: $data.url }" target="_blank"><span data-bind="text: $data.title"></span></a>
+					</h1>
+					<p>
+						Created on: <span data-bind="text: $data.createTimeDisplay"></span>
+					</p>
+					<p>
+						<a data-bind="click: function() { $root.viewLinkDetail($data.id) }"> <span data-bind="text: $data.comments.length"></span> Comments
+						</a>
+					</p>
+					<hr />
 				</div>
 			</div>
 		</div>
+	</div>
 
 	<!-- Link Detail -->
 	<div class="jumbotron" data-bind="visible: currentPage() == 'LinkDetail'">

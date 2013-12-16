@@ -9,22 +9,26 @@ function WhiteItViewModel() {
 	self.currentEntry = ko.observable();
 	self.currentBox = ko.observable();
 	self.currentUser = ko.observable();
+	self.currentMessage = ko.observable();
+	self.currentMessageType = ko.observable();
 	
-	self.messages = ko.observableArray();
 	self.addMessage = function(msg) {
 		self.clearMessagesIn(0);
-		ko.utils.arrayForEach(msg, function(value) {
-			self.messages.push({message: value});
-		});
-		self.clearMessagesIn(10);
+		self.currentMessage(msg.text);
+		self.currentMessageType(msg.css);
+		self.clearMessagesIn(20);
 	};
+	
 	self.clearMessagesIn = function(wait) {
-		if(wait == 0)
-    		self.messages.removeAll();
-		else
+		if(wait == 0) {
+    		self.currentMessage('');
+    		self.currentMessageType('');
+		} else {
 		    setTimeout(function () {
-	    		self.messages.removeAll();
+	    		self.currentMessage('');
+	    		self.currentMessageType('');
 		    }, wait * 1000);
+		}
 	};
 
 	self.showPage = function(page) {
@@ -91,17 +95,20 @@ function WhiteItViewModel() {
 			password : self.password
 		}, function(res) {
 			if(res) {
+				$.get("/login", {}, function(res) {
+					self.currentUser(res);
+					self.addMessage({text: 'Welcome back, '+res+'!', css: 'info'});
+				});
 				self.getCurrentUser();
-				self.addMessage(["Welcome back, " + self.currentUser() + "!"]);
 			}
 			else 
-				self.addMessage(["Username and password do not match"]);
+				self.addMessage({text: "Username and password do not match", css: 'warning'});
 		});
 	};
 
 	self.logout = function() {
 		$.post("/logout", {}, function() {
-			self.addMessage(["See you soon, " + self.currentUser() + "!"]);
+			self.addMessage({text: "See you soon, " + self.currentUser() + "!", css: 'info'});
 			self.getCurrentUser();
 		});
 	};
@@ -125,7 +132,7 @@ function WhiteItViewModel() {
 			url : self.newLinkUrl
 		}, function(res) {
 			self.closeBox();
-			self.addMessage(["Thank you for your Link"]);
+			self.addMessage({text: "Thank you for your Link", css: 'info'});
 			self.viewLinkDetail(res.id);
 		});
 	};
@@ -136,17 +143,17 @@ function WhiteItViewModel() {
 	self.newPasswordRepeat = "";
 	self.register = function() {
 		if(self.newPassword != self.newPasswordRepeat)
-			self.addMessage(["Passwords do not match"]);
+			self.addMessage({text: "Passwords do not match", css: 'error'});
 		else {
 			$.post("/register", {
 				name : self.newUsername,
 				password : self.newPassword
 			}, function(success) {
 				if (success) {
-					self.addMessage(["You have been successfuly registered."]);
+					self.addMessage({text: "You have been successfuly registered.", css: 'info'});
 					self.closeBox();
 				} else {
-					self.addMessage(["There was a problem with your registration. Probably the username has already been choosen."])
+					self.addMessage({text: "There was a problem with your registration. Probably the username has already been choosen.", css: 'error'});
 				}
 				self.loadEntries();
 			});
@@ -160,7 +167,7 @@ function WhiteItViewModel() {
 			text : self.newLinkComment
 		}, function() {
 			self.closeBox();
-			self.addMessage(["Thank you for your comment"]);
+			self.addMessage({text: "Thank you for your comment", css: 'info'});
 			self.loadEntry(self.currentEntry().id);
 		});
 	};
@@ -168,6 +175,8 @@ function WhiteItViewModel() {
 	// Init
 	self.getCurrentUser();
 	self.currentBox(null);
+	self.currentMessage('');
+	self.currentMessageType('');
 
 	// Sammy.js
 	Sammy(function() {
@@ -193,11 +202,24 @@ function WhiteItViewModel() {
 	}).run();
 }
 
-// create viewModel and apply bindings
+ko.bindingHandlers.fadeVisible = {
+    init: function(element, valueAccessor) {
+        // Initially set the element to be instantly visible/hidden depending on the value
+        var value = valueAccessor();
+        ko.unwrap(value) ? $(element).slideDown(400) : $(element).hide();
+    },
+    update: function(element, valueAccessor) {
+        // Whenever the value subsequently changes, slowly fade the element in or out
+        var value = valueAccessor();
+        ko.unwrap(value) ? $(element).slideDown(400) : $(element).slideUp("slow");
+    }
+};
+
+//create viewModel and apply bindings
 var viewModel = new WhiteItViewModel();
 ko.applyBindings(viewModel);
 
-// Socket.io
+//Socket.io
 var socket = io.connect('http://localhost:4730/');
 
 socket.on('message', function(param) {

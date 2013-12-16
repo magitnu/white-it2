@@ -36,11 +36,23 @@
 	border-bottom: 1px solid #CCC;
 	background-color: #DDD;
 	padding-bottom: 15px;
+	padding-top: 10px;
 }
 .messages {
 	margin-bottom: 0px; 
-	border-bottom: 1px solid #9999FF;
-	background-color: #99CCFF;
 	padding-bottom: 5px;
 	padding-top: 5px;
+}
+
+.info {
+	border-bottom: 1px solid #9999FF;
+	background-color: #99CCFF;
+}
+.warning {
+	border-bottom: 1px solid #FCC605;
+	background-color: #F9AC04;
+}
+.error {
+	border-bottom: 1px solid #FF5353;
+	background-color: #F93636;
 }
