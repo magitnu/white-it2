@@ -158,6 +158,8 @@ function WhiteItViewModel() {
 				text : "Thank you for your Link",
 				css : 'info'
 			});
+			self.newLinkTitle('');
+			self.newLinkUrl('');
 			self.viewLinkDetail(res.id);
 		});
 	};
