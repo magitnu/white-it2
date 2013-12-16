@@ -1,27 +1,47 @@
-#hidden {CC
-	visibility: hidden;
+#hidden {
+	CC visibility: hidden;
+}
+
+footer {
+	font-size: 0.9em;
+	text-align: center;
+	font-weight: 300;
 }
 
 .linkEntry {
 	margin: 50px 0;
+	font-weight: 300;
 }
 
 .linkEntry h1 {
 	-padding-top: 15px;
 	margin: 0 0 20px;
+	font-weight: 300;
 }
 
 .linkEntry hr {
 	border: 1px dashed;
-    color: #CCCCCC;
-    margin: 20px 0;
+	color: #CCCCCC;
+	margin: 20px 0;
+}
+
+.linkComment {
+	margin-left: 50px;
+}
+
+.linkComment .vote {
+	margin-top: -12px;
+}
+
+.linkCommentText {
+	font-weight: 400;
 }
 
 .vote {
 	display: block;
 	float: left;
 	text-align: center;
-	font-size: 1.3em;
+	font-weight: 400;
 	width: 25px;
 	margin-left: -50px;
 	margin-top: 10px;
@@ -31,15 +51,20 @@
 	display: block;
 }
 
+.vote img:hover {
+	transform: scale(1.2);
+}
+
 .topBox {
-	margin-bottom: 0px; 
+	margin-bottom: 0px;
 	border-bottom: 1px solid #CCC;
 	background-color: #DDD;
 	padding-bottom: 15px;
 	padding-top: 10px;
 }
+
 .messages {
-	margin-bottom: 0px; 
+	margin-bottom: 0px;
 	padding-bottom: 5px;
 	padding-top: 5px;
 }
@@ -48,10 +73,12 @@
 	border-bottom: 1px solid #9999FF;
 	background-color: #99CCFF;
 }
+
 .warning {
 	border-bottom: 1px solid #FCC605;
 	background-color: #F9AC04;
 }
+
 .error {
 	border-bottom: 1px solid #FF5353;
 	background-color: #F93636;

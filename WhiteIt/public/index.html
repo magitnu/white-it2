@@ -7,7 +7,7 @@
 <link href="client.css" rel="stylesheet" />
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet" />
 </head>
-<body style="display:none" data-bind="visible: true">
+<body style="display: none" data-bind="visible: true">
 	<!-- Header bar -->
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -20,7 +20,8 @@
 			<div class="navbar-collapse collapse">
 				<div class="navbar-form navbar-right" data-bind="visible: currentUser() != ''">
 					<!-- TODO -->
-					<span class="navbar-message">Hi <span data-bind="text: currentUser()"></span>, you are logged in!</span>
+					<span class="navbar-message">Hi <span data-bind="text: currentUser()"></span>, you are logged in!
+					</span>
 					<button data-bind="click: function() { $root.showBox('NewComment') },
 									   visible: currentPage() == 'LinkDetail'" class="btn btn-success">New Comment</button>
 					<button data-bind="click: function() { $root.showBox('NewLink') }" class="btn btn-success">New Link</button>
@@ -40,7 +41,7 @@
 			<!--/.navbar-collapse -->
 		</div>
 	</div>
-	
+
 	<div style="padding-top: 51px;">
 		<!-- Messages -->
 		<div data-bind="fadeVisible: currentMessage() != ''">
@@ -50,14 +51,14 @@
 				</div>
 			</div>
 		</div>
-		
-	
-	<!-- Top Boxes -->
+
+
+		<!-- Top Boxes -->
 		<!-- New Link -->
 		<div class="jumbotron topBox" data-bind="fadeVisible: currentBox() == 'NewLink'">
 			<div class="container">
-				<button data-bind="click: function() { $root.closeBox(); }" class="btn" style="font-weight: bold;float:right">X</button>
-				
+				<button data-bind="click: function() { $root.closeBox(); }" class="btn" style="font-weight: bold; float: right">X</button>
+
 				<form role="form">
 					<h2>New Link</h2>
 					<div class="form-group">
@@ -70,12 +71,12 @@
 				</form>
 			</div>
 		</div>
-		
+
 		<!-- Register -->
 		<div class="jumbotron topBox" data-bind="fadeVisible: currentBox() == 'Register'">
 			<div class="container">
-				<button data-bind="click: function() { $root.closeBox(); }" class="btn" style="font-weight: bold;float:right">X</button>
-				
+				<button data-bind="click: function() { $root.closeBox(); }" class="btn" style="font-weight: bold; float: right">X</button>
+
 				<form role="form">
 					<h2>Register</h2>
 					<div class="form-group">
@@ -89,19 +90,19 @@
 					</div>
 					<button data-bind="click: function() { $root.register() }" class="btn btn-success">Register</button>
 				</form>
-	
+
 			</div>
 		</div>
-		
+
 		<!-- New Comment -->
 		<div class="jumbotron topBox" data-bind="fadeVisible: currentBox() == 'NewComment'">
 			<div class="container">
-				<button data-bind="click: function() { $root.closeBox(); }" class="btn" style="font-weight: bold;float:right">X</button>
-				
+				<button data-bind="click: function() { $root.closeBox(); }" class="btn" style="font-weight: bold; float: right">X</button>
+
 				<form role="form">
 					<h2>New Comment</h2>
 					<div class="form-group">
-						<textarea data-bind="value: newLinkComment" placeholder="Comment" class="form-control"></textarea>
+						<textarea maxlength="300" data-bind="value: newLinkComment" placeholder="Comment (max. 300 chars)" class="form-control" style="resize: none;"></textarea>
 					</div>
 					<button data-bind="click: function() { $root.createComment() }" class="btn btn-success">Create Comment</button>
 				</form>
@@ -115,16 +116,15 @@
 			<div data-bind="foreach: entries">
 				<div class="linkEntry">
 					<div class="vote">
-						<img data-bind="click: function() { $root.vote($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> 
-						<span data-bind="text: $data.rating.value"></span> 
-						<img data-bind=" click: function() { $root.vote($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
+						<img data-bind="style: { opacity: $root.currentUser() != '' ?  1 : 0.2 }, click: function() { $root.vote($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
+							data-bind="style: { opacity: $root.currentUser() != '' ?  1 : 0.2 }, click: function() { $root.vote($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
 						/>
 					</div>
 					<h1>
 						<a data-bind="attr: { href: $data.url }" target="_blank"><span data-bind="text: $data.title"></span></a>
 					</h1>
 					<p>
-						Created on: <span data-bind="text: $data.createTimeDisplay"></span>
+						Created by <span data-bind="text: $data.author"></span> on <span data-bind="text: $data.createTimeDisplay"></span>
 					</p>
 					<p>
 						<a data-bind="click: function() { $root.viewLinkDetail($data.id) }"> <span data-bind="text: $data.comments.length"></span> Comments
@@ -144,44 +144,37 @@
 
 				<div class="linkEntry">
 					<div class="vote">
-						<img data-bind="click: function() { $root.vote($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
-							data-bind="click: function() { $root.vote($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
+						<img data-bind="style: { opacity: $root.currentUser() != '' ?  1 : 0.2 }, click: function() { $root.vote($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
+							data-bind="style: { opacity: $root.currentUser() != '' ?  1 : 0.2 }, click: function() { $root.vote($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
 						/>
 					</div>
 					<h1>
 						<a data-bind="attr: { href: $data.url }" target="_blank"><span data-bind="text: $data.title"></span></a>
 					</h1>
 					<p>
-						Created on: <span data-bind="text: $data.createTimeDisplay"></span>
-					</p>
-					<p>
-						<a data-bind="click: function() { $root.viewLinkDetail($data.id) }"> <span data-bind="text: $data.comments.length"></span> Comments
-						</a>
+						Created by <span data-bind="text: $data.author"></span> on <span data-bind="text: $data.createTimeDisplay"></span>
 					</p>
 					<hr />
 				</div>
 
-				<div data-bind="foreach: comments">
+				<div class="linkComment" data-bind="foreach: comments">
 					<div class="linkEntry">
 						<div class="vote">
-							<img data-bind="click: function() { $root.voteComment($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
-								data-bind="click: function() { $root.voteComment($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
+							<img data-bind="style: { opacity: $root.currentUser() != '' ?  1 : 0.2 }, click: function() { $root.voteComment($data.id, 'up') }, attr: {src: $root.getVoteImg($data, 'up')}" /> <span data-bind="text: $data.rating.value"></span> <img
+								data-bind="style: { opacity: $root.currentUser() != '' ?  1 : 0.2 }, click: function() { $root.voteComment($data.id, 'down') }, attr: {src: $root.getVoteImg($data, 'down')}"
 							/>
 						</div>
 						<h1>
 							<a data-bind="attr: { href: $data.url }" target="_blank"><span data-bind="text: $data.title"></span></a>
 						</h1>
 						<p>
-							Created by: <span data-bind="text: $data.author"></span>
+							Created by <span data-bind="text: $data.author"></span> on <span data-bind="text: $data.createTimeDisplay"></span>
 						</p>
-						<p>
-							Created on: <span data-bind="text: $data.createTimeDisplay"></span>
-						</p>
-						<p>
+						<p class="linkCommentText">
 							<span data-bind="text: $data.text"></span>
 						</p>
 						<hr />
-					</div>				
+					</div>
 				</div>
 
 			</div>
@@ -189,8 +182,6 @@
 
 		</div>
 	</div>
-
-	<hr>
 
 	<footer>
 		<p>&copy; WhiteIt 2013</p>

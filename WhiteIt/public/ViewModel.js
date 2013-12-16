@@ -1,13 +1,12 @@
 function WhiteItViewModel() {
 	var self = this;
-	self.pages = [ 'AllLinks', 'LinkDetail' ];
-	self.boxes = [ 'Empty', 'Register', 'NewLink', 'NewComment' ];
 
+	// Define observable Variables
 	self.entries = ko.observableArray([]);
-
-	self.currentPage = ko.observable();
+	self.currentPage = ko.observable(); // 'AllLinks', 'LinkDetail'
 	self.currentEntry = ko.observable();
-	self.currentBox = ko.observable();
+	self.currentBox = ko.observable(); // 'Empty', 'Register', 'NewLink',
+	// 'NewComment'
 	self.currentUser = ko.observable();
 	self.currentMessage = ko.observable();
 	self.currentMessageType = ko.observable();
@@ -65,17 +64,21 @@ function WhiteItViewModel() {
 
 	// Voting
 	self.vote = function(entryId, vote) {
-		$.post("/entry/" + entryId + "/" + vote);
-		if (self.currentPage() == 'AllLinks') {
-			self.loadEntries();
-		} else {
-			self.loadEntry(entryId);
+		if (self.currentUser() != '') {
+			$.post("/entry/" + entryId + "/" + vote);
+			if (self.currentPage() == 'AllLinks') {
+				self.loadEntries();
+			} else {
+				self.loadEntry(entryId);
+			}
 		}
 	};
 
 	self.voteComment = function(commentId, vote) {
-		$.post("/comment/" + commentId + "/" + vote);
-		self.loadEntry(self.currentEntry().id);
+		if (self.currentUser() != '') {
+			$.post("/comment/" + commentId + "/" + vote);
+			self.loadEntry(self.currentEntry().id);
+		}
 	};
 
 	self.getVoteImg = function(entry, vote) {
@@ -154,6 +157,7 @@ function WhiteItViewModel() {
 				self.name('');
 				self.password('');
 				self.loadCurrentUser();
+				self.showBox(null);
 			} else
 				self.addMessage({
 					text : "Username and password do not match",
@@ -206,14 +210,13 @@ function WhiteItViewModel() {
 				text : "Thank you for your comment",
 				css : 'info'
 			});
-			self.loadEntry(self.currentEntry().id);
 			self.newLinkComment('');
+			self.loadEntry(self.currentEntry().id);
 		});
 	};
 
 	// Init
 	self.loadCurrentUser();
-	self.currentBox(null);
 	self.currentMessage('');
 	self.currentMessageType('');
 
@@ -223,13 +226,13 @@ function WhiteItViewModel() {
 			self.currentPage(this.params.page);
 			self.currentEntry(null);
 			self.loadEntries();
-			if (self.currentBox() == 'NewComment')
-				self.showBox(null);
+			self.showBox(null);
 		});
 
 		this.get('#:page/:entryId', function() {
 			self.currentPage(this.params.page);
 			self.loadEntry(this.params.entryId);
+			self.showBox(null);
 		});
 
 		// default path
