@@ -110,7 +110,10 @@ app.get('/login', function (req, res) {
          res.json(false);
          return;
      }
-     users.push(new User(users.length, post.name, post.password));
+     
+     var newUser = new User(users.length, post.name, post.password);
+     users.push(newUser);
+     req.session.user_id = newUser.id;
      res.json(true);
  });
  

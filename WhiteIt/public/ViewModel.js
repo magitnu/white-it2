@@ -122,7 +122,7 @@ function WhiteItViewModel() {
 						css : 'info'
 					});
 				});
-				self.getCurrentUser();
+				self.loadCurrentUser();
 			} else
 				self.addMessage({
 					text : "Username and password do not match",
@@ -137,13 +137,7 @@ function WhiteItViewModel() {
 				text : "See you soon, " + self.currentUser() + "!",
 				css : 'info'
 			});
-			self.getCurrentUser();
-		});
-	};
-
-	self.getCurrentUser = function(data) {
-		$.get("/login", {}, function(res) {
-			self.currentUser(res);
+			self.loadCurrentUser();
 		});
 	};
 
@@ -193,6 +187,7 @@ function WhiteItViewModel() {
 												text : "You have been successfuly registered.",
 												css : 'info'
 											});
+									self.loadCurrentUser();
 									self.closeBox();
 								} else {
 									self
