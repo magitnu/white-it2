@@ -5,8 +5,7 @@ function WhiteItViewModel() {
 	self.entries = ko.observableArray([]);
 	self.currentPage = ko.observable(); // 'AllLinks', 'LinkDetail'
 	self.currentEntry = ko.observable();
-	self.currentBox = ko.observable(); // 'Empty', 'Register', 'NewLink',
-	// 'NewComment'
+	self.currentBox = ko.observable(); // 'Empty', 'Register', 'NewLink', 'NewComment'
 	self.currentUser = ko.observable();
 	self.currentMessage = ko.observable();
 	self.currentMessageType = ko.observable();
@@ -263,7 +262,7 @@ var viewModel = new WhiteItViewModel();
 ko.applyBindings(viewModel);
 
 // Socket.io
-var socket = io.connect('http://localhost:4730/');
+var socket = io.connect('/');
 
 socket.on('message', function(param) {
 	switch (param.action) {
